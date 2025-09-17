@@ -7,7 +7,7 @@ const Sidebar = () => {
       <h2 className="text-lg font-semibold mb-6">Menu</h2>
       <ul className="space-y-4 text-gray-700 text-base">
         <li className="hover:text-blue-600 cursor-pointer flex items-center">
-          <Link to="/" className="flex items-center">
+          <Link to="/upload" className="flex items-center">
             📄 <span className="ml-2">Create Job Profile</span>
           </Link>
         </li>
