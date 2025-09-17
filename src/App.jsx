@@ -1,17 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Dashboard from './Dashboard.jsx'
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Dashboard from './Dashboard';
+import FileUpload from './components/FileUpload';
+import Profiles from './components/Profiles';
+import Settings from './components/Settings';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-   <div className="flex flex-1 w-full h-full">
-      <Dashboard/>
+    <div className="flex flex-1 w-full h-full">
+      <Dashboard>
+        <Routes>
+          <Route path="/" element={<FileUpload />} />
+          <Route path="/profiles" element={<Profiles />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </Dashboard>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
