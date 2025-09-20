@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krishi Mitra - Smart Farmer Advisory</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Language & Location Setup Modal -->
+    <div id="setupModal" class="modal">
+        <div class="modal-content">
+            <div class="setup-header">
+                <h1>🌾 Krishi Mitra</h1>
+                <p>Your Smart Farming Assistant</p>
+            </div>
+            
+            <div class="setup-form">
+                <div class="form-group">
+                    <label class="form-label">भाषा चुनें / Select Language:</label>
+                    <select id="languageSelect" class="form-control">
+                        <option value="en">English</option>
+                        <option value="hi">हिंदी</option>
+                        <option value="ta">தமிழ்</option>
+                        <option value="te">తెలుగు</option>
+                        <option value="mr">मराठी</option>
+                        <option value="bn">বাংলা</option>
+                        <option value="gu">ગુજરાતી</option>
+                        <option value="kn">ಕನ್ನಡ</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">State / राज्य:</label>
+                    <select id="stateSelect" class="form-control">
+                        <option value="">Select State</option>
+                        <option value="punjab">Punjab</option>
+                        <option value="up">Uttar Pradesh</option>
+                        <option value="bihar">Bihar</option>
+                        <option value="wb">West Bengal</option>
+                        <option value="gujarat">Gujarat</option>
+                        <option value="maharashtra">Maharashtra</option>
+                        <option value="karnataka">Karnataka</option>
+                        <option value="telangana">Telangana</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">District / जिला:</label>
+                    <select id="districtSelect" class="form-control">
+                        <option value="">Select District</option>
+                    </select>
+                </div>
+
+                <button id="setupComplete" class="btn btn--primary btn--full-width">
+                    Continue to Dashboard / डैशबोर्ड पर जाएं
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="mainApp" class="app-container hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <h1 class="app-title">🌾 Krishi Mitra</h1>
+                    <p class="location-info">
+                        <span id="currentLocation">📍 Select Location</span>
+                    </p>
+                </div>
+                <div class="header-right">
+                    <button id="voiceBtn" class="btn btn--secondary voice-btn">🎤</button>
+                    <button id="settingsBtn" class="btn btn--secondary">⚙️</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Weather Widget -->
+        <section class="weather-widget">
+            <div class="weather-content">
+                <div class="weather-main">
+                    <span class="weather-icon">☀️</span>
+                    <div class="weather-info">
+                        <span class="temperature">28°C</span>
+                        <span class="condition">Partly Cloudy</span>
+                    </div>
+                </div>
+                <div class="weather-details">
+                    <span>💧 Humidity: 65%</span>
+                    <span>💨 Wind: 12 km/h</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Alerts Section -->
+        <section id="alertsSection" class="alerts-section">
+            <div class="alert alert--warning">
+                <span class="alert-icon">⚠️</span>
+                <div class="alert-content">
+                    <strong>Weather Alert</strong>
+                    <p>Heavy rainfall expected in next 24 hours. Postpone spraying operations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <div class="action-grid">
+                <button class="action-card" data-module="crop-advisory">
+                    <span class="action-icon">🌱</span>
+                    <h3>Crop Advisory</h3>
+                    <p>Get crop recommendations</p>
+                </button>
+                
+                <button class="action-card" data-module="disease-detection">
+                    <span class="action-icon">🔍</span>
+                    <h3>Disease Detection</h3>
+                    <p>Upload crop images</p>
+                </button>
+                
+                <button class="action-card" data-module="market-prices">
+                    <span class="action-icon">📈</span>
+                    <h3>Market Prices</h3>
+                    <p>Latest crop prices</p>
+                </button>
+                
+                <button class="action-card" data-module="soil-health">
+                    <span class="action-icon">🌍</span>
+                    <h3>Soil Health</h3>
+                    <p>Soil test & fertilizer</p>
+                </button>
+                
+                <button class="action-card" data-module="expert-chat">
+                    <span class="action-icon">👨‍🌾</span>
+                    <h3>Expert Help</h3>
+                    <p>Chat with experts</p>
+                </button>
+                
+                <button class="action-card" data-module="schemes">
+                    <span class="action-icon">🏛️</span>
+                    <h3>Govt Schemes</h3>
+                    <p>Benefits & subsidies</p>
+                </button>
+            </div>
+        </section>
+
+        <!-- Module Content -->
+        <main id="moduleContent" class="module-content hidden">
+            <!-- Crop Advisory Module -->
+            <div id="crop-advisory" class="module hidden">
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>🌱 Crop Advisory</h2>
+                </div>
+                
+                <div class="crop-selector">
+                    <label class="form-label">Select Crop:</label>
+                    <select id="cropSelect" class="form-control">
+                        <option value="">Choose a crop</option>
+                        <option value="rice">Rice (चावल)</option>
+                        <option value="wheat">Wheat (गेहूं)</option>
+                        <option value="cotton">Cotton (कपास)</option>
+                    </select>
+                </div>
+
+                <div id="cropDetails" class="crop-details hidden">
+                    <div class="detail-cards">
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>📅 Growing Season</h3>
+                                <div id="seasonInfo"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>🌱 Soil Requirements</h3>
+                                <div id="soilInfo"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>💰 Market Price</h3>
+                                <div id="priceInfo"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card__body">
+                                <h3>🧪 Fertilizer Recommendations</h3>
+                                <div id="fertilizerInfo"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Disease Detection Module -->
+            <div id="disease-detection" class="module hidden">
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>🔍 Disease Detection</h2>
+                </div>
+                
+                <div class="upload-area">
+                    <div class="upload-zone" id="uploadZone">
+                        <span class="upload-icon">📸</span>
+                        <p>Take photo or upload image</p>
+                        <p class="upload-hint">Drag image here or click to select</p>
+                        <input type="file" id="imageInput" accept="image/*" hidden>
+                    </div>
+                    
+                    <div class="upload-buttons">
+                        <button id="cameraBtn" class="btn btn--primary">📷 Take Photo</button>
+                        <button id="uploadBtn" class="btn btn--secondary">📁 Upload Image</button>
+                    </div>
+                </div>
+
+                <div id="detectionResult" class="detection-result hidden">
+                    <div class="result-card">
+                        <h3>Analysis Result</h3>
+                        <div id="diseaseInfo"></div>
+                        <div id="treatmentInfo"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Prices Module -->
+            <div id="market-prices" class="module hidden">
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>📈 Market Prices</h2>
+                </div>
+                
+                <div class="price-cards">
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="price-item">
+                                <div class="crop-name">🌾 Rice</div>
+                                <div class="price-value">₹2,850/quintal</div>
+                                <div class="price-change negative">↓ -1.2%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="price-item">
+                                <div class="crop-name">🌾 Wheat</div>
+                                <div class="price-value">₹2,150/quintal</div>
+                                <div class="price-change positive">↑ +2.5%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="price-item">
+                                <div class="crop-name">🌱 Cotton</div>
+                                <div class="price-value">₹6,700/quintal</div>
+                                <div class="price-change positive">↑ +3.8%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container" style="height: 300px; position: relative;">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Soil Health Module -->
+            <div id="soil-health" class="module hidden">
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>🌍 Soil Health Assistant</h2>
+                </div>
+                
+                <div class="soil-tools">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>📊 Soil Test Recommendations</h3>
+                            <p>Get your soil tested every 3 years for optimal results.</p>
+                            <button class="btn btn--primary">Find Nearest Lab</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>🧮 Fertilizer Calculator</h3>
+                            <div class="calculator-inputs">
+                                <select class="form-control">
+                                    <option>Select Crop</option>
+                                    <option value="rice">Rice</option>
+                                    <option value="wheat">Wheat</option>
+                                </select>
+                                <input type="number" placeholder="Area (acres)" class="form-control">
+                                <button class="btn btn--primary">Calculate</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>🌿 Organic Alternatives</h3>
+                            <ul class="organic-tips">
+                                <li>Compost: 5 tons per hectare</li>
+                                <li>Green manuring with legumes</li>
+                                <li>Biofertilizers for nitrogen fixation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expert Chat Module -->
+            <div id="expert-chat" class="module hidden">
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>👨‍🌾 Expert Consultation</h2>
+                </div>
+                
+                <div class="expert-list">
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="expert-info">
+                                <div class="expert-avatar">👨‍🔬</div>
+                                <div class="expert-details">
+                                    <h3>Dr. Ramesh Kumar</h3>
+                                    <p>Rice & Wheat Expert</p>
+                                    <p>15 years experience</p>
+                                    <span class="status status--success">Available</span>
+                                </div>
+                                <button class="btn btn--primary">Chat</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="expert-info">
+                                <div class="expert-avatar">👩‍🔬</div>
+                                <div class="expert-details">
+                                    <h3>Dr. Priya Sharma</h3>
+                                    <p>Cotton & Pest Management</p>
+                                    <p>12 years experience</p>
+                                    <span class="status status--warning">Busy</span>
+                                </div>
+                                <button class="btn btn--secondary">Schedule</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-section">
+                    <h3>Frequently Asked Questions</h3>
+                    <div class="faq-item">
+                        <details>
+                            <summary>When should I sow wheat?</summary>
+                            <p>Wheat should be sown between October-December depending on your location and variety.</p>
+                        </details>
+                    </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary>How to control pest attacks?</summary>
+                            <p>Use integrated pest management - combine biological, chemical, and cultural methods.</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Government Schemes Module -->
+            <div id="schemes" class="module hidden">
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>🏛️ Government Schemes</h2>
+                </div>
+                
+                <div class="schemes-list">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>PM-KISAN</h3>
+                            <p>Direct income support of ₹6000 per year</p>
+                            <p><strong>Eligibility:</strong> All landholding farmers</p>
+                            <div class="scheme-actions">
+                                <button class="btn btn--primary">Check Eligibility</button>
+                                <a href="https://pmkisan.gov.in" target="_blank" class="btn btn--secondary">Apply Online</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Soil Health Card</h3>
+                            <p>Free soil testing and fertilizer recommendations</p>
+                            <p><strong>Eligibility:</strong> All farmers</p>
+                            <div class="scheme-actions">
+                                <button class="btn btn--primary">Find Test Center</button>
+                                <a href="https://soilhealth.dac.gov.in" target="_blank" class="btn btn--secondary">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>PMFBY (Crop Insurance)</h3>
+                            <p>Crop insurance against natural calamities</p>
+                            <p><strong>Eligibility:</strong> All farmers</p>
+                            <div class="scheme-actions">
+                                <button class="btn btn--primary">Calculate Premium</button>
+                                <a href="https://pmfby.gov.in" target="_blank" class="btn btn--secondary">Apply Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-module="dashboard">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Home</span>
+            </button>
+            <button class="nav-item" data-module="crop-advisory">
+                <span class="nav-icon">🌱</span>
+                <span class="nav-label">Crops</span>
+            </button>
+            <button class="nav-item" data-module="market-prices">
+                <span class="nav-icon">📈</span>
+                <span class="nav-label">Prices</span>
+            </button>
+            <button class="nav-item" data-module="expert-chat">
+                <span class="nav-icon">👨‍🌾</span>
+                <span class="nav-label">Expert</span>
+            </button>
+        </nav>
+
+        <!-- Voice Interface Modal -->
+        <div id="voiceModal" class="modal hidden">
+            <div class="modal-content voice-modal">
+                <div class="voice-interface">
+                    <div class="voice-animation">
+                        <div class="voice-circle"></div>
+                    </div>
+                    <h3>🎤 Voice Assistant</h3>
+                    <p id="voiceStatus">Tap to speak...</p>
+                    <div class="voice-controls">
+                        <button id="startVoice" class="btn btn--primary">Start Speaking</button>
+                        <button id="stopVoice" class="btn btn--secondary">Stop</button>
+                    </div>
+                    <div id="voiceResult" class="voice-result hidden">
+                        <p><strong>You said:</strong> <span id="spokenText"></span></p>
+                        <p><strong>Response:</strong> <span id="voiceResponse"></span></p>
+                    </div>
+                </div>
+                <button class="modal-close" id="closeVoice">×</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
