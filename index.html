@@ -154,275 +154,274 @@
             <main id="moduleContent" class="module-content hidden">
                 <!-- Crop Advisory Module -->
                 <div id="crop-advisory" class="module hidden">
-                    <div class="module-header">
-                        <button class="btn btn--secondary back-btn">← Back</button>
-                        <h2>🌱 Crop Advisory</h2>
-                    </div>
-
-                    <div class="crop-selector">
-                        <label class="form-label">Select Crop:</label>
-                        <select id="cropSelect" class="form-control">
-                            <option value="">Choose a crop</option>
-                            <option value="rice">Rice (चावल)</option>
-                            <option value="wheat">Wheat (गेहूं)</option>
-                            <option value="cotton">Cotton (कपास)</option>
-                        </select>
-                    </div>
-
-                    <div id="cropDetails" class="crop-details hidden">
-                        <div class="detail-cards">
-                            <div class="card">
-                                <div class="card__body">
-                                    <h3>📅 Growing Season</h3>
-                                    <div id="seasonInfo"></div>
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card__body">
-                                    <h3>🌱 Soil Requirements</h3>
-                                    <div id="soilInfo"></div>
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card__body">
-                                    <h3>💰 Market Price</h3>
-                                    <div id="priceInfo"></div>
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card__body">
-                                    <h3>🧪 Fertilizer Recommendations</h3>
-                                    <div id="fertilizerInfo"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>🌱 Crop Advisory</h2>
                 </div>
 
-                <!-- Disease Detection Module -->
-                <div id="disease-detection" class="module hidden">
-                    <div class="module-header">
-                        <button class="btn btn--secondary back-btn">← Back</button>
-                        <h2>🔍 Disease Detection</h2>
-                    </div>
-
-                    <div class="upload-area">
-                        <div class="upload-zone" id="uploadZone">
-                            <span class="upload-icon">📸</span>
-                            <p>Take photo or upload image</p>
-                            <p class="upload-hint">Drag image here or click to select</p>
-                            <input type="file" id="imageInput" accept="image/*" hidden>
-                        </div>
-                        
-                        <div class="upload-buttons">
-                            <button id="cameraBtn" class="btn btn--primary">📷 Take Photo</button>
-                            <button id="uploadBtn" class="btn btn--secondary">📁 Upload Image</button>
-                        </div>
-                    </div>
-
-                    <div id="detectionResult" class="detection-result hidden">
-                        <div class="result-card">
-                            <h3>Analysis Result</h3>
-                            <div id="diseaseInfo"></div>
-                            <div id="treatmentInfo"></div>
-                        </div>
-                    </div>
+                <div class="crop-selector">
+                    <label class="form-label">Select Crop:</label>
+                    <select id="cropSelect" class="form-control">
+                        <option value="">Choose a crop</option>
+                        <option value="rice">Rice (चावल)</option>
+                        <option value="wheat">Wheat (गेहूं)</option>
+                        <option value="cotton">Cotton (कपास)</option>
+                    </select>
                 </div>
 
-                <!-- Market Prices Module -->
-                <div id="market-prices" class="module hidden">
-                    <div class="module-header">
-                        <button class="btn btn--secondary back-btn">← Back</button>
-                        <h2>📈 Market Prices</h2>
-                    </div>
-
-                    <div class="price-cards">
+                <div id="cropDetails" class="crop-details hidden">
+                    <div class="detail-cards">
                         <div class="card">
                             <div class="card__body">
-                                <div class="price-item">
-                                    <div class="crop-name">🌾 Rice</div>
-                                    <div class="price-value">₹2,850/quintal</div>
-                                    <div class="price-change negative">↓ -1.2%</div>
-                                </div>
+                                <h3>📅 Growing Season</h3>
+                                <div id="seasonInfo"></div>
                             </div>
                         </div>
                         
                         <div class="card">
                             <div class="card__body">
-                                <div class="price-item">
-                                    <div class="crop-name">🌾 Wheat</div>
-                                    <div class="price-value">₹2,150/quintal</div>
-                                    <div class="price-change positive">↑ +2.5%</div>
-                                </div>
+                                <h3>🌱 Soil Requirements</h3>
+                                <div id="soilInfo"></div>
                             </div>
                         </div>
                         
                         <div class="card">
                             <div class="card__body">
-                                <div class="price-item">
-                                    <div class="crop-name">🌱 Cotton</div>
-                                    <div class="price-value">₹6,700/quintal</div>
-                                    <div class="price-change positive">↑ +3.8%</div>
-                                </div>
+                                <h3>💰 Market Price</h3>
+                                <div id="priceInfo"></div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="chart-container" style="height: 300px; position: relative;">
-                        <canvas id="priceChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Soil Health Module -->
-                <div id="soil-health" class="module hidden">
-                    <div class="module-header">
-                        <button class="btn btn--secondary back-btn">← Back</button>
-                        <h2>🌍 Soil Health Assistant</h2>
-                    </div>
-
-                    <div class="soil-tools">
+                        
                         <div class="card">
                             <div class="card__body">
-                                <h3>📊 Soil Test Recommendations</h3>
-                                <p>Get your soil tested every 3 years for optimal results.</p>
-                                <button class="btn btn--primary">Find Nearest Lab</button>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card__body">
-                                <h3>🧮 Fertilizer Calculator</h3>
-                                <div class="calculator-inputs">
-                                    <select class="form-control">
-                                        <option>Select Crop</option>
-                                        <option value="rice">Rice</option>
-                                        <option value="wheat">Wheat</option>
-                                    </select>
-                                    <input type="number" placeholder="Area (acres)" class="form-control">
-                                    <button class="btn btn--primary">Calculate</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card__body">
-                                <h3>🌿 Organic Alternatives</h3>
-                                <ul class="organic-tips">
-                                    <li>Compost: 5 tons per hectare</li>
-                                    <li>Green manuring with legumes</li>
-                                    <li>Biofertilizers for nitrogen fixation</li>
-                                </ul>
+                                <h3>🧪 Fertilizer Recommendations</h3>
+                                <div id="fertilizerInfo"></div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Expert Chat Module -->
-                <div id="expert-chat" class="module hidden">
-                    <div class="module-header">
-                        <button class="btn btn--secondary back-btn">← Back</button>
-                        <h2>👨‍🌾 Expert Consultation</h2>
+            <!-- Disease Detection Module -->
+            <div id="disease-detection" class="module hidden">
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>🔍 Disease Detection</h2>
+                </div>
+
+                <div class="upload-area">
+                    <div class="upload-zone" id="uploadZone">
+                        <span class="upload-icon">📸</span>
+                        <p>Take photo or upload image</p>
+                        <p class="upload-hint">Drag image here or click to select</p>
+                        <input type="file" id="imageInput" accept="image/*" hidden>
+                    </div>
+
+                    <div class="upload-buttons">
+                        <button id="cameraBtn" class="btn btn--primary">📷 Take Photo</button>
+                        <button id="uploadBtn" class="btn btn--secondary">📁 Upload Image</button>
+                    </div>
+                </div>
+
+                <div id="detectionResult" class="detection-result hidden">
+                    <div class="result-card">
+                        <h3>Analysis Result</h3>
+                        <div id="diseaseInfo"></div>
+                        <div id="treatmentInfo"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Market Prices Module -->
+            <div id="market-prices" class="module hidden">
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>📈 Market Prices</h2>
+                </div>
+
+                <div class="price-cards">
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="price-item">
+                                <div class="crop-name">🌾 Rice</div>
+                                <div class="price-value">₹2,850/quintal</div>
+                                <div class="price-change negative">↓ -1.2%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="price-item">
+                                <div class="crop-name">🌾 Wheat</div>
+                                <div class="price-value">₹2,150/quintal</div>
+                                <div class="price-change positive">↑ +2.5%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="price-item">
+                                <div class="crop-name">🌱 Cotton</div>
+                                <div class="price-value">₹6,700/quintal</div>
+                                <div class="price-change positive">↑ +3.8%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-container" style="height: 300px; position: relative;">
+                    <canvas id="priceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Soil Health Module -->
+            <div id="soil-health" class="module hidden">
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>🌍 Soil Health Assistant</h2>
+                </div>
+
+                <div class="soil-tools">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>📊 Soil Test Recommendations</h3>
+                            <p>Get your soil tested every 3 years for optimal results.</p>
+                            <button class="btn btn--primary">Find Nearest Lab</button>
+                        </div>
                     </div>
                     
-                    <div class="expert-list">
-                        <div class="card">
-                            <div class="card__body">
-                                <div class="expert-info">
-                                    <div class="expert-avatar">👨‍🔬</div>
-                                    <div class="expert-details">
-                                        <h3>Dr. Ramesh Kumar</h3>
-                                        <p>Rice & Wheat Expert</p>
-                                        <p>15 years experience</p>
-                                        <span class="status status--success">Available</span>
-                                    </div>
-                                    <button class="btn btn--primary">Chat</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card__body">
-                                <div class="expert-info">
-                                    <div class="expert-avatar">👩‍🔬</div>
-                                    <div class="expert-details">
-                                        <h3>Dr. Priya Sharma</h3>
-                                        <p>Cotton & Pest Management</p>
-                                        <p>12 years experience</p>
-                                        <span class="status status--warning">Busy</span>
-                                    </div>
-                                    <button class="btn btn--secondary">Schedule</button>
-                                </div>
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>🧮 Fertilizer Calculator</h3>
+                            <div class="calculator-inputs">
+                                <select class="form-control">
+                                    <option>Select Crop</option>
+                                    <option value="rice">Rice</option>
+                                    <option value="wheat">Wheat</option>
+                                </select>
+                                <input type="number" placeholder="Area (acres)" class="form-control">
+                                <button class="btn btn--primary">Calculate</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="faq-section">
-                        <h3>Frequently Asked Questions</h3>
-                        <div class="faq-item">
-                            <details>
-                                <summary>When should I sow wheat?</summary>
-                                <p>Wheat should be sown between October-December depending on your location and variety.</p>
-                            </details>
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>🌿 Organic Alternatives</h3>
+                            <ul class="organic-tips">
+                                <li>Compost: 5 tons per hectare</li>
+                                <li>Green manuring with legumes</li>
+                                <li>Biofertilizers for nitrogen fixation</li>
+                            </ul>
                         </div>
-                        <div class="faq-item">
-                            <details>
-                                <summary>How to control pest attacks?</summary>
-                                <p>Use integrated pest management - combine biological, chemical, and cultural methods.</p>
-                            </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Expert Chat Module -->
+            <div id="expert-chat" class="module hidden">
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>👨‍🌾 Expert Consultation</h2>
+                </div>
+
+                <div class="expert-list">
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="expert-info">
+                                <div class="expert-avatar">👨‍🔬</div>
+                                <div class="expert-details">
+                                    <h3>Dr. Ramesh Kumar</h3>
+                                    <p>Rice & Wheat Expert</p>
+                                    <p>15 years experience</p>
+                                    <span class="status status--success">Available</span>
+                                </div>
+                                <button class="btn btn--primary">Chat</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card__body">
+                            <div class="expert-info">
+                                <div class="expert-avatar">👩‍🔬</div>
+                                <div class="expert-details">
+                                    <h3>Dr. Priya Sharma</h3>
+                                    <p>Cotton & Pest Management</p>
+                                    <p>12 years experience</p>
+                                    <span class="status status--warning">Busy</span>
+                                </div>
+                                <button class="btn btn--secondary">Schedule</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Government Schemes Module -->
-                <div id="schemes" class="module hidden">
-                    <div class="module-header">
-                        <button class="btn btn--secondary back-btn">← Back</button>
-                        <h2>🏛️ Government Schemes</h2>
+                <div class="faq-section">
+                    <h3>Frequently Asked Questions</h3>
+                    <div class="faq-item">
+                        <details>
+                            <summary>When should I sow wheat?</summary>
+                            <p>Wheat should be sown between October-December depending on your location and variety.</p>
+                        </details>
                     </div>
-                    
-                    <div class="schemes-list">
-                        <div class="card">
-                            <div class="card__body">
-                                <h3>PM-KISAN</h3>
-                                <p>Direct income support of ₹6000 per year</p>
-                                <p><strong>Eligibility:</strong> All landholding farmers</p>
-                                <div class="scheme-actions">
-                                    <button class="btn btn--primary">Check Eligibility</button>
-                                    <a href="https://pmkisan.gov.in" target="_blank" class="btn btn--secondary">Apply Online</a>
-                                </div>
+                    <div class="faq-item">
+                        <details>
+                            <summary>How to control pest attacks?</summary>
+                            <p>Use integrated pest management - combine biological, chemical, and cultural methods.</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Government Schemes Module -->
+            <div id="schemes" class="module hidden">
+                <div class="module-header">
+                    <button class="btn btn--secondary back-btn">← Back</button>
+                    <h2>🏛️ Government Schemes</h2>
+                </div>
+
+                <div class="schemes-list">
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>PM-KISAN</h3>
+                            <p>Direct income support of ₹6000 per year</p>
+                            <p><strong>Eligibility:</strong> All landholding farmers</p>
+                            <div class="scheme-actions">
+                                <button class="btn btn--primary">Check Eligibility</button>
+                                <a href="https://pmkisan.gov.in" target="_blank" class="btn btn--secondary">Apply Online</a>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="card">
-                            <div class="card__body">
-                                <h3>Soil Health Card</h3>
-                                <p>Free soil testing and fertilizer recommendations</p>
-                                <p><strong>Eligibility:</strong> All farmers</p>
-                                <div class="scheme-actions">
-                                    <button class="btn btn--primary">Find Test Center</button>
-                                    <a href="https://soilhealth.dac.gov.in" target="_blank" class="btn btn--secondary">Learn More</a>
-                                </div>
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>Soil Health Card</h3>
+                            <p>Free soil testing and fertilizer recommendations</p>
+                            <p><strong>Eligibility:</strong> All farmers</p>
+                            <div class="scheme-actions">
+                                <button class="btn btn--primary">Find Test Center</button>
+                                <a href="https://soilhealth.dac.gov.in" target="_blank" class="btn btn--secondary">Learn More</a>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="card">
-                            <div class="card__body">
-                                <h3>PMFBY (Crop Insurance)</h3>
-                                <p>Crop insurance against natural calamities</p>
-                                <p><strong>Eligibility:</strong> All farmers</p>
-                                <div class="scheme-actions">
-                                    <button class="btn btn--primary">Calculate Premium</button>
-                                    <a href="https://pmfby.gov.in" target="_blank" class="btn btn--secondary">Apply Now</a>
-                                </div>
+                    <div class="card">
+                        <div class="card__body">
+                            <h3>PMFBY (Crop Insurance)</h3>
+                            <p>Crop insurance against natural calamities</p>
+                            <p><strong>Eligibility:</strong> All farmers</p>
+                            <div class="scheme-actions">
+                                <button class="btn btn--primary">Calculate Premium</button>
+                                <a href="https://pmfby.gov.in" target="_blank" class="btn btn--secondary">Apply Now</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
 
         <!-- Bottom Navigation -->
         <nav class="bottom-nav">
