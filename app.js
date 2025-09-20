@@ -334,7 +334,10 @@ class FarmerAdvisoryApp {
 
     showDashboard() {
         const moduleContent = document.getElementById('moduleContent');
+        const dashboardContent = document.getElementById('dashboardContent');
+
         if (moduleContent) moduleContent.classList.add('hidden');
+        if (dashboardContent) dashboardContent.classList.remove('hidden');
         
         document.querySelectorAll('.module').forEach(module => {
             module.classList.add('hidden');
@@ -345,6 +348,9 @@ class FarmerAdvisoryApp {
 
     showModule(moduleName) {
         const moduleContent = document.getElementById('moduleContent');
+        const dashboardContent = document.getElementById('dashboardContent');
+
+        if (dashboardContent) dashboardContent.classList.add('hidden');
         if (moduleContent) moduleContent.classList.remove('hidden');
         
         // Hide all modules
